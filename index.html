@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games-Hub</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --accent-color: #bb86fc;
+            --card-bg: #1e1e1e;
+            --header-color: #03dac6;
+            --tab-active: #3700b3;
+            --tab-inactive: #2d2d2d;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--header-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #333;
+            margin-bottom: 2rem;
+        }
+        
+        .tab {
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            background-color: var(--tab-inactive);
+            border: none;
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: background-color 0.3s;
+            margin-right: 4px;
+            border-radius: 4px 4px 0 0;
+        }
+        
+        .tab.active {
+            background-color: var(--tab-active);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .empty-state {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .empty-state h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .empty-state p {
+            font-size: 1.1rem;
+            opacity: 0.7;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-container {
+            height: 80vh;
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: var(--card-bg);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Games-Hub</h1>
+            <div class="subtitle">Discover and play community-created games and apps</div>
+        </header>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('games')">Games</button>
+            <button class="tab" onclick="switchTab('apps')">Apps</button>
+            <button class="tab" onclick="switchTab('form')">Publish</button>
+        </div>
+        
+        <div id="games" class="tab-content active">
+            <div class="empty-state">
+                <h2>No Games Yet</h2>
+                <p>There are currently no games available in the hub. Check back soon as our community begins to share their creations.</p>
+            </div>
+        </div>
+        
+        <div id="apps" class="tab-content">
+            <div class="empty-state">
+                <h2>No Apps Yet</h2>
+                <p>There are currently no apps available in the hub. Check back soon as our community begins to share their applications.</p>
+            </div>
+        </div>
+        
+        <div id="form" class="tab-content">
+            <div class="form-container">
+                <iframe src="https://forms.gle/j6As6V1NXCxYccFX9"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            // Hide all tab contents
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+            
+            // Deactivate all tabs
+            const tabs = document.getElementsByClassName('tab');
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+            
+            // Activate the selected tab and content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Find and activate the button that corresponds to this tab
+            const buttons = document.getElementsByClassName('tab');
+            for (let i = 0; i < buttons.length; i++) {
+                if (buttons[i].textContent.toLowerCase().includes(tabId.substring(0, 4))) {
+                    buttons[i].classList.add('active');
+                    break;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
